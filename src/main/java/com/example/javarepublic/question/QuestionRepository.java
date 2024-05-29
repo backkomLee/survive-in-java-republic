@@ -1,4 +1,4 @@
-package question;
+package com.example.javarepublic.question;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
