@@ -1,40 +1,23 @@
 package com.example.javarepublic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-import java.util.Optional;
-
-import com.example.javarepublic.answer.Answer;
-import com.example.javarepublic.answer.AnswerRepository;
-import com.example.javarepublic.question.Question;
-import com.example.javarepublic.question.QuestionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import org.springframework.transaction.annotation.Transactional;
+import com.example.javarepublic.question.QuestionService;
 
 @SpringBootTest
 class JavarepublicApplicationTests {
 
 	@Autowired
-	private QuestionRepository questionRepository;
+	private QuestionService questionService;
 
-	@Autowired
-	private AnswerRepository answerRepository;
-
-	@Transactional
 	@Test
 	void testJpa() {
-		Optional<Question> oq = this.questionRepository.findById(2);
-		assertTrue(oq.isPresent());
-		Question q = oq.get();
-
-		List<Answer> answerList = q.getAnswerList();
-
-		assertEquals(1, answerList.size());
-		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
+		for (int i = 1; i <= 100; i++) {
+			String subject = String.format("종강 언제하나요?", i);
+			String content = "종강 시켜주세요";
+			this.questionService.create(subject, content);
+		}
 	}
 }
