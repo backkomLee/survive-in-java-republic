@@ -11,4 +11,9 @@ public class MainController {
     public String index() {
         return "made by backkom 2024";
     }
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/question/list";
+    }
 }
