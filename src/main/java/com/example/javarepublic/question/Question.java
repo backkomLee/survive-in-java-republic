@@ -1,6 +1,7 @@
 package com.example.javarepublic.question;
 
 import com.example.javarepublic.answer.Answer;
+import com.example.javarepublic.category.Category;
 import com.example.javarepublic.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -39,4 +40,7 @@ public class Question {
 
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int view;
+
+    @ManyToOne
+    private Category category;
 }
