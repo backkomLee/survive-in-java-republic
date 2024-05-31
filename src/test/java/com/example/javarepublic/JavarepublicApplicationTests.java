@@ -14,9 +14,9 @@ class JavarepublicApplicationTests {
 
 	@Test
 	void testJpa() {
-		for (int i = 1; i <= 20; i++) {
-			String subject = String.format("종강 시켜주세요", i);
-			String content = "너무 힘들어요";
+		for (int i = 1; i <= 50; i++) {
+			String subject = String.format("테스트", i);
+			String content = "";
 			this.questionService.create(subject, content, null, null);
 		}
 	}

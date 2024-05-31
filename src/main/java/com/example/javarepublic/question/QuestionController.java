@@ -7,7 +7,6 @@ import com.example.javarepublic.user.SiteUser;
 import com.example.javarepublic.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.security.Principal;
 
 
-@Slf4j
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
@@ -32,7 +30,6 @@ public class QuestionController {
 
     @GetMapping("/list")
     public String List(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-        log.info("page:{}, kw:{}", page, kw);
         Page<Question> paging = this.questionService.getList(page, kw, "자유");
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
@@ -41,7 +38,6 @@ public class QuestionController {
 
     @GetMapping("/sw")
     public String swList(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-        log.info("page:{}, kw:{}", page, kw);
         Page<Question> paging = this.questionService.getList(page, kw, "소융대");
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
@@ -50,7 +46,6 @@ public class QuestionController {
 
     @GetMapping("/food")
     public String foodList(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-        log.info("page:{}, kw:{}", page, kw);
         Page<Question> paging = this.questionService.getList(page, kw, "학식");
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
@@ -59,8 +54,15 @@ public class QuestionController {
 
     @GetMapping("/workout")
     public String workoutList(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-        log.info("page:{}, kw:{}", page, kw);
-        Page<Question> paging = this.questionService.getList(page, kw, "헬스");
+        Page<Question> paging = this.questionService.getList(page, kw, "운동");
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_list";
+    }
+
+    @GetMapping("/test")
+    public String testList(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw, "테스트");
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "question_list";
